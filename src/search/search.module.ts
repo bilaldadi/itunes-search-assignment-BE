@@ -6,7 +6,7 @@ import { searchResults } from './entities/search.entity';
 import { HttpModule } from '@nestjs/axios';
 
 @Module({
-  imports: [HttpModule,TypeOrmModule.forFeature([searchResults])], 
+  imports: [HttpModule, TypeOrmModule.forFeature([searchResults])],
   controllers: [SearchController],
   providers: [SearchService],
 })

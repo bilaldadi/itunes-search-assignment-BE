@@ -8,17 +8,17 @@ import { SearchResDto } from './dto/search-res.dto';
 
 @Injectable()
 export class SearchService {
- constructor(
-  private readonly http: HttpService,
-  @InjectRepository(searchResults)
-  private readonly searchResultsRepository: Repository<searchResults>
- ) {}
+  constructor(
+    private readonly http: HttpService,
+    @InjectRepository(searchResults)
+    private readonly searchResultsRepository: Repository<searchResults>,
+  ) {}
 
   async search(query: string): Promise<SearchResDto> {
     const searchUrl = `https://itunes.apple.com/search?term=${query}&country=SA`;
-    const response = await firstValueFrom(this.http.get(searchUrl)) ;
+    const response = await firstValueFrom(this.http.get(searchUrl));
 
-    const FormattedResults :SearchResDto = {
+    const FormattedResults: SearchResDto = {
       resultCount: response.data.resultCount,
       results: response.data.results,
     };

@@ -1,4 +1,4 @@
-import { Controller, Get,Param } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { SearchService } from './search.service';
 import { SearchResDto } from './dto/search-res.dto';
 

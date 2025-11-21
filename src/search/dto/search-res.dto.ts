@@ -1,4 +1,4 @@
 export class SearchResDto {
-    resultCount: number;
-    results: any;
+  resultCount: number;
+  results: any;
 }
