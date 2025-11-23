@@ -4,9 +4,14 @@ import { AppService } from './app.service';
 import { SearchModule } from './search/search.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { searchResults } from './search/entities/search.entity';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      envFilePath: '.env',
+      isGlobal: true,
+    }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_HOST || 'localhost',
@@ -16,7 +21,11 @@ import { searchResults } from './search/entities/search.entity';
       database: process.env.DB_NAME || 'postgres',
       entities: [searchResults],
       synchronize: true,
+      ssl: process.env.DB_HOST && process.env.DB_HOST !== 'localhost' 
+        ? { rejectUnauthorized: false } 
+        : false,
     }),
+    TypeOrmModule.forFeature([searchResults]),
     SearchModule,
   ],
   controllers: [AppController],
